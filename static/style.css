@@ -5,11 +5,7 @@ body {
     align-items: center;
     margin-top: 20px;
     min-height: 100vh;
-    background-color: #f0f0f0; /* Simplified background for debugging */
-}
-
-body::before {
-    /* Removed for debugging */
+    background: linear-gradient(to right, #e0f2f7 0%, #c2e0eb 100%); /* Light blue brushed aluminum effect */
 }
 
 #game-status {
