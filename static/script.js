@@ -162,23 +162,21 @@ $(document).ready(function() {
     }
 
     function onDrop(source, target) {
-        const move = game.move({
+        // see if the move is legal
+        var move = game.move({
             from: source,
             to: target,
-            promotion: 'q'
+            promotion: 'q' // NOTE: always promote to a queen for example simplicity
         });
 
+        // illegal move
         if (move === null) return 'snapback';
-        
-        updateMoveList();
-        goToCurrentPosition();
+
         updateStatus();
+        updateMoveList(); // Update the move list
         
-        if (!game.game_over()) {
-            getBestMove();
-        }
-        
-        return true;
+        // make random legal move for black
+        window.setTimeout(getBestMove, 250);
     }
 
     function onSnapEnd() {
