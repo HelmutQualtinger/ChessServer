@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess GUI</title>
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Chess Game</h1>
+    
+    <!-- Game Setup -->
+    <div id="game-setup">
+        <label for="time-mode">Time Mode:</label>
+        <select id="time-mode">
+            <option value="unlimited">Unlimited</option>
+            <option value="blitz">Blitz (5 min)</option>
+            <option value="rapid">Rapid (15 min)</option>
+            <option value="classical">Classical (30 min)</option>
+        </select>
+    </div>
+    
+    <!-- Timer Display -->
+    <div id="timer-display">
+        <div id="black-timer">Black: ∞</div>
+        <div id="white-timer">White: ∞</div>
+    </div>
+    
+    <div id="board" style="width: 400px"></div>
+    <div id="game-status"></div>
+    
+    <!-- Game Controls -->
+    <div id="game-controls">
+        <button id="new-game-btn">New Game</button>
+        <button id="surrender-btn">Surrender</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

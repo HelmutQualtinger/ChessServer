@@ -1,0 +1,84 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#game-status {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#new-game-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#game-setup {
+    margin-bottom: 15px;
+}
+
+#game-setup label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#game-setup select {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#timer-display {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#black-timer {
+    color: #333;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+#white-timer {
+    color: #333;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+#game-controls {
+    margin-top: 15px;
+}
+
+#game-controls button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#surrender-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#surrender-btn:hover {
+    background-color: #c82333;
+}
+
+#surrender-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
