@@ -27,13 +27,7 @@
         <div id="white-timer">White: ∞</div>
     </div>
     
-    <div id="main-content">
-        <div id="board" style="width: 400px"></div>
-        <div id="movelist-container">
-            <h3>Move List</h3>
-            <div id="movelist"></div>
-        </div>
-    </div>
+    <div id="board" style="width: 400px"></div>
     <div id="game-status"></div>
     
     <!-- Game Controls -->

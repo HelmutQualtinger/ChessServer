@@ -9,6 +9,8 @@ $(document).ready(function() {
     let currentPlayerTimer = null;
     let gameStarted = false;
     let gameEnded = false;
+    let moveHistory = [];
+    let currentMoveIndex = -1;
 
     // Time modes in seconds
     const TIME_MODES = {
@@ -86,6 +88,65 @@ $(document).ready(function() {
         }
     }
 
+    // --- Move List Functions ---
+    function updateMoveList() {
+        const moveListEl = $('#movelist');
+        moveListEl.empty();
+        
+        const moves = game.history();
+        
+        for (let i = 0; i < moves.length; i += 2) {
+            const moveNumber = Math.floor(i / 2) + 1;
+            const whiteMove = moves[i];
+            const blackMove = moves[i + 1];
+            
+            const movePairDiv = $('<div class="move-pair"></div>');
+            const moveNumberSpan = $(`<span class="move-number">${moveNumber}.</span>`);
+            movePairDiv.append(moveNumberSpan);
+            
+            const whiteMoveSpan = $(`<span class="move-white" data-move-index="${i}">${whiteMove}</span>`);
+            movePairDiv.append(whiteMoveSpan);
+            
+            if (blackMove) {
+                const blackMoveSpan = $(`<span class="move-black" data-move-index="${i + 1}">${blackMove}</span>`);
+                movePairDiv.append(blackMoveSpan);
+            }
+            
+            moveListEl.append(movePairDiv);
+        }
+        
+        // Scroll to bottom
+        moveListEl.scrollTop(moveListEl[0].scrollHeight);
+    }
+
+    function highlightCurrentMove() {
+        $('.move-white, .move-black').removeClass('move-current');
+        if (currentMoveIndex >= 0) {
+            $(`.move-white[data-move-index="${currentMoveIndex}"], .move-black[data-move-index="${currentMoveIndex}"]`).addClass('move-current');
+        }
+    }
+
+    function goToMove(moveIndex) {
+        const moves = game.history();
+        if (moveIndex < 0 || moveIndex >= moves.length) return;
+        
+        // Create a new game and replay moves up to the selected move
+        const tempGame = new Chess();
+        for (let i = 0; i <= moveIndex; i++) {
+            tempGame.move(moves[i]);
+        }
+        
+        board.position(tempGame.fen());
+        currentMoveIndex = moveIndex;
+        highlightCurrentMove();
+    }
+
+    function goToCurrentPosition() {
+        board.position(game.fen());
+        currentMoveIndex = game.history().length - 1;
+        highlightCurrentMove();
+    }
+
     // --- ChessboardJS Configuration ---
     function onDragStart(source, piece, position, orientation) {
         if (gameEnded) return false;
@@ -109,6 +170,8 @@ $(document).ready(function() {
 
         if (move === null) return 'snapback';
         
+        updateMoveList();
+        goToCurrentPosition();
         updateStatus();
         
         if (!game.game_over()) {
@@ -152,6 +215,8 @@ $(document).ready(function() {
                     if (!gameEnded) {
                         game.move(data.best_move, { sloppy: true });
                         board.position(game.fen());
+                        updateMoveList();
+                        goToCurrentPosition();
                         updateStatus();
                     }
                 },
@@ -175,9 +240,12 @@ $(document).ready(function() {
         board.start();
         gameStarted = false;
         gameEnded = false;
+        moveHistory = [];
+        currentMoveIndex = -1;
         stopTimer();
         initializeTimers();
         updateStatus();
+        updateMoveList();
         $('#surrender-btn').prop('disabled', false);
     }
 
@@ -209,5 +277,16 @@ $(document).ready(function() {
         if (!gameStarted) {
             initializeTimers();
         }
+    });
+
+    // Movelist click handler using delegation
+    $('#movelist').on('click', '.move-white, .move-black', function() {
+        const moveIndex = parseInt($(this).data('move-index'));
+        goToMove(moveIndex);
+    });
+
+    // Double-click to return to current position
+    $('#movelist').on('dblclick', function() {
+        goToCurrentPosition();
     });
 });
