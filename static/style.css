@@ -1,11 +1,61 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
     min-height: 100vh;
-    background: linear-gradient(to right, #e0f2f7 0%, #c2e0eb 100%); /* Light blue brushed aluminum effect */
+    background: 
+        /* Wood knots and imperfections */
+        radial-gradient(ellipse 20px 8px at 15% 25%, rgba(101, 67, 33, 0.6) 0%, transparent 50%),
+        radial-gradient(ellipse 15px 6px at 85% 70%, rgba(139, 90, 43, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 12px 5px at 40% 85%, rgba(160, 82, 45, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse 18px 7px at 70% 15%, rgba(101, 67, 33, 0.5) 0%, transparent 50%),
+        /* Fine grain lines */
+        linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(139, 90, 43, 0.4) 1%, 
+            transparent 2%, 
+            rgba(101, 67, 33, 0.3) 3%, 
+            transparent 4%, 
+            rgba(139, 90, 43, 0.35) 5%, 
+            transparent 6%,
+            rgba(160, 82, 45, 0.2) 7%,
+            transparent 8%
+        ),
+        /* Medium grain lines */
+        linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(139, 90, 43, 0.6) 4%, 
+            transparent 8%, 
+            rgba(101, 67, 33, 0.5) 12%, 
+            transparent 16%, 
+            rgba(139, 90, 43, 0.55) 20%, 
+            transparent 24%
+        ),
+        /* Wide grain pattern */
+        linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(139, 90, 43, 0.8) 10%, 
+            transparent 20%, 
+            rgba(101, 67, 33, 0.7) 30%, 
+            transparent 40%, 
+            rgba(139, 90, 43, 0.75) 50%, 
+            transparent 60%
+        ),
+        /* Base wood color with depth */
+        linear-gradient(135deg, #8B5A2B 0%, #A0522D 15%, #654321 30%, #8B5A2B 45%, #A0522D 60%, #654321 75%, #8B5A2B 100%);
+    background-size: 
+        100% 100%, 
+        100% 100%, 
+        100% 100%, 
+        100% 100%, 
+        2px 100%, 
+        8px 100%, 
+        40px 100%, 
+        100% 100%;
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
 }
 
 #game-status {
